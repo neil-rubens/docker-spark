@@ -17,13 +17,23 @@ RUN curl -s http://d3kbcqa49mib13.cloudfront.net/spark-1.4.0.tgz | tar -xz -C /u
 # build for scala 2.11 and hadoop 2.6
 RUN export MAVEN_OPTS="-Xmx2g -XX:MaxPermSize=512M -XX:ReservedCodeCacheSize=512m"
 RUN /usr/local/spark-1.4.0/dev/change-version-to-2.11.sh
-RUN cd /usr/local/spark-1.4.0/ && ./build/mvn -Pyarn -Phadoop-2.6 -Dhadoop.version=2.6.0 -DskipTests -Dscala-2.11 clean package
-RUN cd /usr/local && ln -s spark-1.4.0 spark
+
+
+
+# build and make distributable/runnable spark: https://spark.apache.org/docs/latest/building-spark.html#building-a-runnable-distribution
+# TODO-UPGRADE: when upgrading spark need to double-check the lines that are being deleted bellow
+# delete lines that require user input (asking if it is ok to proceed): e.g.:
+#  read -p "Would you like to continue anyways? [y,n]: " -r
+#  if [[ ! "$REPLY" =~ ^[Yy]$ ]]; then
+RUN sed -i.bak -e '153,157d' /usr/local/spark-1.4.0/make-distribution.sh
+RUN cd /usr/local/spark-1.4.0/ && ./make-distribution.sh --name custom  -Pyarn -Phadoop-2.6 -Dhadoop.version=2.6.0 -DskipTests -Dscala-2.11 package
+#RUN cd /usr/local/spark-1.4.0/ && ./build/mvn -Pyarn -Phadoop-2.6 -Dhadoop.version=2.6.0 -DskipTests -Dscala-2.11 clean package
+RUN cd /usr/local/spark-1.4.0 && ln -s dist spark
 ENV SPARK_HOME /usr/local/spark
 RUN mkdir $SPARK_HOME/yarn-remote-client
 ADD yarn-remote-client $SPARK_HOME/yarn-remote-client
 
-RUN $BOOTSTRAP && $HADOOP_PREFIX/bin/hadoop dfsadmin -safemode leave && $HADOOP_PREFIX/bin/hdfs dfs -put $SPARK_HOME-1.4.0-bin-hadoop2.6/lib /spark
+RUN $BOOTSTRAP && $HADOOP_PREFIX/bin/hadoop dfsadmin -safemode leave && $HADOOP_PREFIX/bin/hdfs dfs -put $SPARK_HOME-1.4.0/lib /spark
 
 ENV YARN_CONF_DIR $HADOOP_PREFIX/etc/hadoop
 ENV PATH $PATH:$SPARK_HOME/bin:$HADOOP_PREFIX/bin
