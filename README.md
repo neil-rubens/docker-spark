@@ -1,7 +1,14 @@
 fork of `sequenceiq/docker-spark` modified to work with scala 2.11
 
+see Dockerfile for changes
 
+# Build Docker Image
 
+Download this project; and at it's root:
+
+`docker build --rm -t activeintel/spark:1.4.0 .`
+
+---
 
 
 Original Docs from https://github.com/sequenceiq/docker-spark
