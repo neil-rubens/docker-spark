@@ -26,13 +26,11 @@ RUN /usr/local/spark-1.4.0/dev/change-version-to-2.11.sh
 #  read -p "Would you like to continue anyways? [y,n]: " -r
 #  if [[ ! "$REPLY" =~ ^[Yy]$ ]]; then
 RUN sed -i.bak -e '153,157d' /usr/local/spark-1.4.0/make-distribution.sh
+#RUN cat /usr/local/spark-1.4.0/make-distribution.sh
 
-# TODO: delete
-RUN cat /usr/local/spark-1.4.0/make-distribution.sh
-
-RUN cd /usr/local/spark-1.4.0/ && ./make-distribution.sh --name custom  -Pyarn -Phadoop-2.6 -Dhadoop.version=2.6.0 -DskipTests -Dscala-2.11 package clean
-#RUN cd /usr/local/spark-1.4.0/ && ./build/mvn -Pyarn -Phadoop-2.6 -Dhadoop.version=2.6.0 -DskipTests -Dscala-2.11 clean package
-RUN cd /usr/local/spark-1.4.0 && ln -s dist spark
+#RUN cd /usr/local/spark-1.4.0/ && ./make-distribution.sh --name custom  -Pyarn -Phadoop-2.6 -Dhadoop.version=2.6.0 -DskipTests -Dscala-2.11 package clean
+RUN cd /usr/local/spark-1.4.0/ && ./build/mvn -Pyarn -Phadoop-2.6 -Dhadoop.version=2.6.0 -DskipTests -Dscala-2.11 clean package
+RUN cd /usr/local/ && ln -s spark-1.4.0 spark
 ENV SPARK_HOME /usr/local/spark
 RUN mkdir $SPARK_HOME/yarn-remote-client
 ADD yarn-remote-client $SPARK_HOME/yarn-remote-client
