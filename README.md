@@ -1,3 +1,13 @@
+fork of `sequenceiq/docker-spark` modified to work with scala 2.11
+
+
+
+
+
+Original Docs from https://github.com/sequenceiq/docker-spark
+==========
+
+
 Apache Spark on Docker
 ==========
 
