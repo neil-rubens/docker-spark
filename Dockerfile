@@ -19,7 +19,7 @@ RUN export MAVEN_OPTS="-Xmx2g -XX:MaxPermSize=512M -XX:ReservedCodeCacheSize=512
 RUN cd /usr/local/spark-1.4.0
 RUN /usr/local/spark-1.4.0/dev/change-version-to-2.11.sh
 #build/mvn -Pyarn -Phadoop-2.4 -Dhadoop.version=2.4.0 -DskipTests clean package
-RUN RUN /usr/local/spark-1.4.0/build/mvn -Pyarn -Phadoop-2.6 -Dhadoop.version=2.6.0 -DskipTests -Dscala-2.11 clean package
+RUN /usr/local/spark-1.4.0/build/mvn -Pyarn -Phadoop-2.6 -Dhadoop.version=2.6.0 -DskipTests -Dscala-2.11 clean package
 #RUN cd /usr/local && ln -s spark-1.4.0-bin-hadoop2.6 spark
 RUN cd /usr/local && ln -s spark-1.4.0 spark
 ENV SPARK_HOME /usr/local/spark
