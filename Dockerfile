@@ -17,7 +17,7 @@ RUN curl -s http://d3kbcqa49mib13.cloudfront.net/spark-1.4.0.tgz | tar -xz -C /u
 # build for scala 2.11 and hadoop 2.6
 RUN export MAVEN_OPTS="-Xmx2g -XX:MaxPermSize=512M -XX:ReservedCodeCacheSize=512m"
 RUN /usr/local/spark-1.4.0/dev/change-version-to-2.11.sh
-RUN /usr/local/spark-1.4.0/ && ./build/mvn -Pyarn -Phadoop-2.6 -Dhadoop.version=2.6.0 -DskipTests -Dscala-2.11 clean package
+RUN cd /usr/local/spark-1.4.0/ && ./build/mvn -Pyarn -Phadoop-2.6 -Dhadoop.version=2.6.0 -DskipTests -Dscala-2.11 clean package
 RUN cd /usr/local && ln -s spark-1.4.0 spark
 ENV SPARK_HOME /usr/local/spark
 RUN mkdir $SPARK_HOME/yarn-remote-client
