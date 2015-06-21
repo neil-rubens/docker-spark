@@ -9,7 +9,8 @@ This fork provides an spark-docker image for scala 2.11 which requires [building
 
 # Build Docker Image
 
-Download this project; and at it's root:
+Download/pull this project; and at it's root:
 
 `docker build --rm -t activeintel/spark:1.4.0 .`
 
+see issue [#1](/../../issues/1)
