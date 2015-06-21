@@ -11,6 +11,9 @@ RUN wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-mave
 RUN sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
 RUN yum install -y apache-maven
 
+# Enable UTF-8; see http://serverfault.com/questions/275403/how-do-i-change-my-locale-to-utf-8-in-centos
+RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8 && export LC_ALL=en_US.UTF-8
+
 # NR: download source code so can build it for 2.11
 #RUN curl -s http://d3kbcqa49mib13.cloudfront.net/spark-1.4.0-bin-hadoop2.6.tgz | tar -xz -C /usr/local/
 RUN curl -s http://d3kbcqa49mib13.cloudfront.net/spark-1.4.0.tgz | tar -xz -C /usr/local/
