@@ -28,10 +28,7 @@ To verify that image works you can do the following.
 
 Run the image:
 
-`docker run -it -name spark activeintel/spark:1.4.0 bash`
-
-`-name spark` is for convenience allows you to e.g. `docker stop spark` , `docker start spark`
-note: this will start container (instead of image)
+`docker run -it -h sandbox activeintel/spark:1.4.0 bash`
 
 
 ```bash
@@ -52,6 +49,10 @@ For more information see issue [#1](/../../issues/1)
 
 
 Tested with docker `1.5`
+
+# Running Container 
+
+`docker run -d -h sandbox activeintel/spark:1.4.0 -d`
 
 
 # See Also
