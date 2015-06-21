@@ -10,7 +10,7 @@ This fork provides an spark-docker image for scala `2.11` which requires [buildi
 
 ## Pre-Build Image (recommended)
 
-`docker pull activeintel/docker-spark`
+`docker pull activeintel/spark:1.4.0`
 
 ## Manually Build Docker Image
 
