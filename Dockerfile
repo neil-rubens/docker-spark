@@ -44,8 +44,5 @@ COPY bootstrap.sh /etc/bootstrap.sh
 RUN chown root.root /etc/bootstrap.sh
 RUN chmod 700 /etc/bootstrap.sh
 
-# Enable UTF-8; see http://serverfault.com/questions/275403/how-do-i-change-my-locale-to-utf-8-in-centos
-RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8 && export LC_ALL=en_US.UTF-8
-
 
 ENTRYPOINT ["/etc/bootstrap.sh"]
