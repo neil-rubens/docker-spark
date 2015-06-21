@@ -18,7 +18,7 @@ You can also build the image.
 
 Download/pull this project; and at it's root:
 
-`docker build --rm -t activeintel/spark:1.4.0 .`
+`docker build --rm -t spark activeintel/spark:1.4.0 .`
 
 Note: this is a lengthy process; will take ~30 min (for compilation/downloads, etc.).
 
@@ -28,7 +28,11 @@ To verify that image works you can do the following.
 
 Run the image:
 
-`docker run -it activeintel/spark:1.4.0 bash`
+`docker run -it -name spark activeintel/spark:1.4.0 bash`
+
+`-name spark` is for convenience allows you to e.g. `docker stop spark` , `docker start spark`
+note: this will start container (instead of image)
+
 
 ```bash
 # execute the the following command which should write the "Pi is roughly 3.1418" into the logs
@@ -46,6 +50,8 @@ $SPARK_HOME/examples/target/scala-2.11/spark-examples-1.4.0-hadoop2.6.0.jar
 Note that location of the jar `examples/target/scala-2.11/` is different from [sequenceiq/docker-spark](https://github.com/sequenceiq/docker-spark) which is in `lib/`.  
 For more information see issue [#1](/../../issues/1)
 
+
+Tested with docker `1.5`
 
 
 # See Also
